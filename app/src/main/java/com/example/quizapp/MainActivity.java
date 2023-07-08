@@ -21,19 +21,22 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
        letterTextView=findViewById(R.id.Question);
        letterTextView.setText(getRandomLetter());
-       answerTextView=findViewById(R.id.Result);
+
+       answerTextView=findViewById(R.id.answer);
+
 
         Button skyBtn=findViewById(R.id.SkyBtn);
 
         skyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (answerString == "Sky Letter") {
-                    answerTextView.setText("Awesome your answer is right");
+                if (answerString.equals("Sky Letter")) {
+                    answerTextView.setText("Your answer was Correct");
                 } else {
-                    answerTextView.setText("Incorrect! the answer is " + answerString);
+                    answerTextView.setText("Wrong! the answer is " + answerString);
                 }
 
                 // Wait for 5 seconds and create a new question
@@ -51,10 +54,10 @@ public class MainActivity extends AppCompatActivity {
         grassBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (answerString == "Grass Letter") {
-                    answerTextView.setText("Awesome your answer is right");
+                if (answerString.equals( "Grass Letter")) {
+                    answerTextView.setText(" Your answer was Correct");
                 } else {
-                    answerTextView.setText("Incorrect! the answer is " + answerString);
+                    answerTextView.setText("Wrong! the answer is " + answerString);
                 }
                 // Wait for 5 seconds and create a new question
                 new Handler().postDelayed(new Runnable() {
@@ -66,6 +69,28 @@ public class MainActivity extends AppCompatActivity {
                 }, 5000);
             }
         });
+
+        Button rootBtn=findViewById(R.id.rootBtn);
+        rootBtn.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if (answerString.equals( "Root Letter")) {
+                            answerTextView.setText("Your answer was Correct");
+                        } else {
+                            answerTextView.setText("Wrong! the answer is " + answerString);
+                        }
+                        // Wait for 5 seconds and create a new question
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                letterTextView.setText(getRandomLetter());
+                                answerTextView.setText("");
+                            }
+                        }, 5000);
+                    }
+                }
+        );
 
     }
     private String getRandomLetter() {
